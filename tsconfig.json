@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "types": ["node"],
+    "typeRoots": [ "../node_modules/@types" ],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@models/*": ["src/models/*"],
+      "@hooks": ["src/hooks"],
+      "@lib/*": ["src/components/lib/*"]
+    }
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}

@@ -57,7 +57,7 @@ function insertStylesToShadowDom(element) {
 const cssLoaders = extra => {
     const loaders = [
         {
-            loader: isProductionMode ? MiniCssExtractPlugin.loader : 'style-loader',
+            loader: 'style-loader',
         },
         {
             loader: 'css-loader',
@@ -71,11 +71,9 @@ const cssLoaders = extra => {
         },
     ];
 
-    if (!isProductionMode) {
-        loaders[0].options = {
-            insert: insertStylesToShadowDom,
-        };
-    }
+    loaders[0].options = {
+        insert: insertStylesToShadowDom,
+    };
 
     if (extra) {
         loaders.push(extra);
@@ -148,23 +146,21 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: isProductionMode
-                    ? cssLoaders()
-                    : [
-                          {
-                              loader: 'style-loader',
-                              options: {
-                                  injectType: 'linkTag',
-                                  insert: insertStylesToShadowDom,
-                              },
-                          },
-                          {
-                              loader: 'file-loader',
-                              options: {
-                                  name: '[path][name].[ext]',
-                              },
-                          },
-                      ],
+                use: [
+                    {
+                        loader: 'style-loader',
+                        options: {
+                            injectType: 'linkTag',
+                            insert: insertStylesToShadowDom,
+                        },
+                    },
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[path][name].[ext]',
+                        },
+                    },
+                ],
             },
             {
                 test: /\.less$/,
